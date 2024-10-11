@@ -10,8 +10,10 @@ const app = express();
 app.use(express.json());
 
 
-app.use(cors());
-app.options("*", cors())
+app.use(cors({
+  origin: "https://restaurant-system-caiodev00s-projects.vercel.app",
+  credentials: true
+}));
 
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 } 
