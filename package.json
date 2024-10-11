@@ -7,8 +7,8 @@
     "dev": "ts-node-dev src/server.ts",
     "build": "tsc --build",
     "start": "node dist/server.js",
-    "yarn-build": "prisma generate && prisma migrate deploy",
-    "prisma:generate": "prisma generate"
+    "postinstall": "prisma generate && prisma migrate deploy",
+    "vercel:generate": "prisma generate"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
