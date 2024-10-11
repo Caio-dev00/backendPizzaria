@@ -9,7 +9,10 @@ import fileUpload from 'express-fileupload';
 const app = express();
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({
+  origin: "https://restaurant-system-xi.vercel.app",
+  credentials: true
+}));
 
 app.use((req, res, next) => {
   console.log('Origin:', req.headers.origin); // Verifique a origem aqui
