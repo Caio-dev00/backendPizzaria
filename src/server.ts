@@ -10,6 +10,10 @@ const app = express();
 app.use(express.json());
 const allowedOrigins = ['https://restaurant-system-sigma.vercel.app'];
 
+app.options("*", cors())
+
+app.use('/files', cors(), express.static(path.resolve(__dirname, '..', 'tmp')));
+
 app.use(cors({
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
@@ -21,6 +25,7 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
+
 
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 } 
