@@ -8,7 +8,20 @@ import fileUpload from 'express-fileupload';
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+const allowedOrigins = ['https://restaurant-system-sigma.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 } 
 }))
