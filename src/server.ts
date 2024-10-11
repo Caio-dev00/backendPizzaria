@@ -23,6 +23,11 @@ app.use(cors({
   credentials: true
 }));
 
+app.use((req, res, next) => {
+  console.log('Origin:', req.headers.origin); // Verifique a origem aqui
+  next();
+});
+
 app.use(fileUpload({
   limits: { fileSize: 50 * 1024 * 1024 } 
 }))
