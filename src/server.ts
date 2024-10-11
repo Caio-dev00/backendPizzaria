@@ -9,9 +9,17 @@ import fileUpload from 'express-fileupload';
 const app = express();
 app.use(express.json());
 
+const allowedOrigins = [process.env.FRONTEND_URL]
 
 app.use(cors({
-  origin: "https://restaurant-system-caiodev00s-projects.vercel.app",
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
 
