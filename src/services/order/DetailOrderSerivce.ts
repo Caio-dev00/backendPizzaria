@@ -11,9 +11,17 @@ class DetailOrderSerivce{
       where:{
         order_id: order_id
       },
-      include:{
-        product:true,
-        order:true,
+      include: {
+        product: true,
+        order: {
+          select: {
+            id: true,
+            table: true, // Inclua explicitamente o campo table aqui
+            name: true,
+            draft: true,
+            status: true,
+          },
+        },
       }
     })
 
